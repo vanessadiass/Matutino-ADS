@@ -1,0 +1,111 @@
+package lista1.exe3;
+
+public class Produto {
+
+    // Java é tipado, variáveis possuem tipo de dados
+    // tipos de dados primitivos (int, float, double, boolean)
+    // tipos de dados de classe (String, Float, Integer, Double)
+    public int codigo;
+    public String nome;
+    public String descricao;
+    public int qtde;
+    public float preco;
+
+    public Produto(){
+        
+    }
+    // método construtor, tem o mesmo nome da classe
+    public Produto(int codigo, String nome, String descricao,
+            int qtde, float preco) {
+        // this.codigo representa o código do obj que chama construtor
+        // codigo representa o valor informado pelo usuário
+        this.codigo = codigo;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.qtde = qtde;
+        this.preco = preco;
+    }
+
+    // comprar produtos
+    public void comprar(int x) {
+        this.qtde = this.qtde + x;
+    }
+
+    // vender produto
+    public void vender(int x) {
+        if (x <= this.qtde) {
+            this.qtde = this.qtde - x;
+        } else {
+            System.out.println("Estoque insuficiente");
+        }
+    }
+
+    // aumentar preço do produto
+    public void aumentarPreco(float x) {
+        this.preco = this.preco + x;
+    }
+
+    // diminuir preço do produto
+    public void diminuirPreco(float x) {
+        if (x <= this.preco) {
+            this.preco -= x; // this.preco = this.preco - x
+        } else {
+            System.out.println("Não é possível abaixar preço");
+        }
+    }
+
+    public void exibeDados() {
+        // exibir os dados do objeto que chama o método
+        System.out.println("Código " + this.codigo + " Nome " + this.nome
+                + " Descrição " + this.descricao + " Qtde " + this.qtde + " Preço "
+                + this.preco);
+    }
+}
+TESTEPRODUTO
+*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ */
+
+package lista1.exe3;
+
+/**
+ *
+ * 
+ */
+public class TestaProduto {
+
+    public static void main(String[] args) {
+       // instanciar obj1
+       Produto obj1 = new Produto(1, "Sabonete", 
+               "Dove Creme", 10, 1.8f);
+       Produto obj2 = new Produto(2, "Sabão", 
+               "Neutro", 20, 1.2f);
+      // exibe os dados de obj1
+      obj1.exibeDados();
+      // exibe os dados de obj2
+      obj2.exibeDados();
+      System.out.println("Comprando ...");
+      obj1.comprar(5);
+      obj2.comprar(8);
+      obj1.exibeDados();
+      obj2.exibeDados();
+      System.out.println("Vendendo ...");
+      obj1.vender(2);
+      obj2.vender(5);
+      obj1.exibeDados();
+      obj2.exibeDados();
+      System.out.println("Aumentando preço ...");
+      obj1.aumentarPreco(0.5f);
+      obj2.aumentarPreco(0.9f);
+      obj1.exibeDados();
+      obj2.exibeDados();
+      System.out.println("Diminuindo preço ...");
+      obj1.diminuirPreco(0.2f);
+      obj2.diminuirPreco(0.3f);
+      obj1.exibeDados();
+      obj2.exibeDados();
+      
+      
+      
+    }
+}
