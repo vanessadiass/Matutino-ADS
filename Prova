@@ -1,0 +1,151 @@
+package prova;
+
+
+public abstract  class serie {
+    protected String name;
+    protected String personagem;
+    
+    
+    public serie(){
+        
+    }        
+
+    public serie(String name, String personagem) {
+        this.setName(name);
+        this.setPersonagem (personagem);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public  final void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPersonagem() {
+        return personagem;
+    }
+
+    public final void setPersonagem(String personagem) {
+        this.personagem = personagem;
+    }
+
+    @Override
+    public String toString() {
+        return "serie{" + "name=" + name + ", personagem=" +
+                personagem + '}';
+    }
+    
+     public abstract String move();//será implementado nas filhas 
+    
+    
+    
+}
+
+package prova;
+
+
+public class Personagem  extends serie {
+    
+    private boolean nomep, age;
+    
+     public Personagem() {
+        super();//chama o construtor da super classe
+    }
+
+    public Personagem(boolean nomep, boolean age, String name, String personagem) {
+        super(name, personagem);
+        this.setNomep(nomep);
+        this.setAge (age);
+    }
+
+    public boolean isNomep() {
+        return nomep;
+    }
+
+    public final void setNomep(boolean nomep) {
+        this.nomep = nomep;
+    }
+
+    public boolean isAge() {
+        return age;
+    }
+
+    public final void setAge(boolean age) {
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "Personagem{" + "nomep=" + nomep + ", age=" +
+                age +  super.toString() + '}';
+    }
+
+     @Override
+    public String move() {
+        return "encena";
+    }
+    
+    
+package prova;
+
+
+public class Streaming extends serie{
+    private boolean apresenta;
+    
+    
+     public Streaming(){
+        
+    }
+
+    public Streaming(boolean apresenta, String name, String personagem) {
+        super(name, personagem);
+        this.setApresenta ( apresenta);
+    }
+
+   
+
+    public boolean isApresenta() {
+        return apresenta;
+    }
+
+    public final void setApresenta(boolean apresenta) {
+        this.apresenta = apresenta;
+    }
+
+    @Override
+    public String toString() {
+        return "Streaming{" + "apresenta=" + apresenta +
+                super.toString()+'}';
+    }
+      @Override
+    public String move() {
+        return "exibe";
+    }
+     
+
+ 
+    
+}
+package prova;
+
+
+public class Testa {
+
+    public static void show (serie invisivel) {
+       System.out.println(invisivel.toString());
+         System.out.println(invisivel.move());
+       
+    }
+    
+    public static void main(String[]args){
+        Personagem objPersonagem = new Personagem(true, false "Tokio" ,25);
+        show(objPersonagem);
+        
+        
+        Streaming objStreaming= new Streaming("Netflix", 50);
+        show(objStreaming);
+    }
+    
+}
