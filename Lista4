@@ -1,0 +1,255 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package lista4.exe1;
+
+/**
+ *
+ * @author 1090482211018
+ */
+
+// classe abstrata não pode serinstanciada
+//classe abstrata pode ter metodos abstratos que não são implementados na classe
+//mas devem ser implementados nas classes filhas 
+//classe abstrata é sempre uma classe pai ou superclasse 
+public  abstract class Funcionario {
+    
+    protected String nome,endereco,cpf;
+    protected float salario;
+
+    public Funcionario() {
+    }
+
+    public Funcionario(String nome, String endereco, String cpf, float salario) {
+        this.setNome(nome);
+        this.setEndereco(endereco);
+        this.setCpf(cpf);
+        this.setSalario(salario);
+    }
+
+    public  String getNome() {
+        return nome;
+    }
+
+    public final void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public final void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public final void  setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public float getSalario() {
+        return salario;
+    }
+
+    public final void setSalario(float salario) {
+        this.salario = salario;
+    }
+
+    @Override
+    public String toString() {
+        return "Funcionario{" + "nome=" + nome + ", endereco=" + endereco + ", cpf=" + cpf + ", salario=" + salario + '}';
+    }
+    
+    public abstract float calculaSalario();
+    
+}
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package lista4.exe1;
+
+/**
+ *
+ * @author 1090482211018
+ */
+public class Assistente extends Funcionario{
+    private float horaExtra;
+
+    public Assistente() {
+        super(); //chama construtor da superclasse sem parametros
+    }
+
+    public Assistente(float horaExtra, String nome, String endereco, String cpf, float salario) {
+        super(nome, endereco, cpf, salario);//chama construtor da superclasse com 4 parametros
+        this.horaExtra = horaExtra;
+    }
+
+    public float getHoraExtra() {
+        return horaExtra;
+    }
+
+    public  final void setHoraExtra(float horaExtra) {
+        this.horaExtra = horaExtra;
+    }
+
+    @Override //indica anulação
+    public String toString() {
+        return "Assistente{" + "horaExtra=" + horaExtra + 
+                super.toString() + '}';
+    }
+    //precisamos  anular o metodo herdado calculasalario()
+    
+    @Override//indica a anulação
+    public float calculaSalario(){
+        return this.salario + (this.horaExtra *30 );
+    }
+    
+    
+}
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package lista4.exe1;
+
+/**
+ *
+ * @author 1090482211018
+ */
+public class Gerente extends Funcionario {
+    private float bonus;
+
+    public Gerente() {
+        
+        super();
+    }
+
+    public Gerente(float bonus, String nome, String endereco, String cpf, float salario) {
+        super(nome, endereco, cpf, salario);
+        this.setBonus(bonus);
+    }
+
+    public float getBonus() {
+        return bonus;
+    }
+
+    public final void setBonus(float bonus) {
+        this.bonus = bonus;
+    }
+
+    @Override
+    public String toString() {
+        return "Gerente{" + "bonus=" + bonus + super.toString() + '}';
+    }
+    
+    @Override
+    public float calculaSalario(){
+        return this.salario + this.bonus;
+    }
+    
+    
+    
+    
+}
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package lista4.exe1;
+
+/**
+ *
+ * @author 1090482211018
+ */
+public class Diretor extends Funcionario {
+    
+    private float  acoesEmpresas;
+
+    public Diretor() {
+        super();
+    }
+
+    public Diretor(float acoesEmpresas, String nome, String endereco, String cpf, float salario) {
+        super(nome, endereco, cpf, salario);
+        this.setAcoesEmpresas(acoesEmpresas);
+    }
+
+    public float getAcoesEmpresas() {
+        return acoesEmpresas;
+    }
+
+    public final  void setAcoesEmpresas(float acoesEmpresas) {
+        this.acoesEmpresas = acoesEmpresas;
+    }
+
+    @Override
+    public String toString() {
+        return "Diretor{" + "acoesEmpresas=" + acoesEmpresas +  super.toString()
+                +'}';
+    }
+    
+    @Override
+    
+    public float calculaSalario(){
+        return this.salario + (this.acoesEmpresas * 5)/12;
+    }
+    
+}
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package lista4.exe1;
+
+/**
+ *
+ * @author 1090482211018
+ */
+public class Testa {
+    
+    public static void exibeResultado(Funcionario func){
+        
+        /*func é um objeto da superclasse que tem comportamento polimorfico
+        func pode executar os metodos toString, calcula Salario das classes 
+        Assistente,Gerente ou Diretor. sendo assim func vai executar os metodos
+        de qual classe?
+        depende de qual objeto está sendo passado na chamada do metodo
+        
+        para ser polimorfico precisa de herança, metodos declarados tanto 
+        nos filhos quanto nos pais
+        */
+        System.out.println(func.toString());
+        System.out.println(func.calculaSalario());
+        
+        
+    }
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        
+        
+        Assistente objAssistente= new Assistente(2, "fulano", "franca","123", 3000);
+        exibeResultado(objAssistente);
+       
+        
+        Gerente objGerente= new Gerente (1000, "beltrano", "franca", "456", 4000);
+        exibeResultado(objGerente);
+        
+        Diretor objDiretor= new Diretor (20000, "ciclano", "franca", "789", 5000);
+        exibeResultado(objDiretor);
+        
+        
+        
+        
+    }
+    
+}
